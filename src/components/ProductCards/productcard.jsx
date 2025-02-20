@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaShoppingCart, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const ProductCard = () => {
@@ -97,7 +97,26 @@ const ProductCard = () => {
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
-    const itemsPerPage = 5;
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+
+    // Update items per page based on screen width
+    useEffect(() => {
+        const updateItemsPerPage = () => {
+            const width = window.innerWidth;
+            if (width < 640) {
+                setItemsPerPage(1); // For mobile, show 2 items
+            } else if (width < 1024) {
+                setItemsPerPage(3); // For tablets, show 3 items
+            } else {
+                setItemsPerPage(5); // For desktops, show 5 items
+            }
+        };
+
+        updateItemsPerPage(); // Initial calculation
+        window.addEventListener("resize", updateItemsPerPage); // Update on resize
+
+        return () => window.removeEventListener("resize", updateItemsPerPage);
+    }, []);
 
     const handleNext = () => {
         if (currentIndex + 1 < products.length - itemsPerPage + 1) {
@@ -112,22 +131,19 @@ const ProductCard = () => {
     };
 
     return (
-        <div className="w-full px-5 mt-12 overflow-hidden">
-            <h2
-                className="text-4xl font-bold mb-1 text-center"
-                style={{
-                    fontFamily: "'Garamond', serif",
-                    letterSpacing: '2px',
-                    color: '#2C3E50',
-                    textTransform: 'uppercase',
-                    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
-                }}
-            >
-                BEST PRICE OFFER
-            </h2>
-
-            <p
-                className="text-gray-700 text-center mb-8"
+        <div className="w-full px-5 mt-6 overflow-hidden">
+              <h2 className="text-4xl font-bold mb-1 text-center "
+                    style={{
+                        fontFamily: "'Garamond', serif",
+                        letterSpacing: '2px',
+                        color: '#2C3E50',
+                        textTransform: 'uppercase',
+                        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
+                    }}
+                >
+                    BEST PRICE OFFER
+                </h2>
+            <p className="text-gray-700 text-center mb-8"
                 style={{
                     fontFamily: "'Lora', serif",
                     color: '#7F8C8D'
@@ -135,14 +151,38 @@ const ProductCard = () => {
             >
                 Trending Now
             </p>
-
+            <div className="flex items-center justify-between mb-6 mr-4">
+              
+            <div className="flex space-x-2 ml-auto">
+                    <button
+                        onClick={handlePrev}
+                        className="bg-gray-800 text-white p-2 rounded-full "
+                        disabled={currentIndex === 0}
+                    >
+                        <FaArrowLeft />
+                    </button>
+    
+                    <button
+                        onClick={handleNext}
+                        className="bg-gray-800 text-white p-2 rounded-full"
+                        disabled={currentIndex >= products.length - itemsPerPage}
+                    >
+                        <FaArrowRight />
+                    </button>
+                </div>
+               
+            </div>
+          
+    
             <div className="relative w-full">
-                <div className="flex space-x-4 transition-transform duration-300"
-                    style={{ transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }}>
+                <div
+                    className="flex space-x-4 transition-transform duration-300"
+                    style={{ transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }}
+                >
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="w-1/5 min-w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-4 flex flex-col"
+                            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 min-w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-4 flex flex-col"
                         >
                             <div className="relative">
                                 <img
@@ -173,25 +213,10 @@ const ProductCard = () => {
                         </div>
                     ))}
                 </div>
-
-                <button
-                    onClick={handlePrev}
-                    className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-                    disabled={currentIndex === 0}
-                >
-                    <FaArrowLeft />
-                </button>
-
-                <button
-                    onClick={handleNext}
-                    className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-                    disabled={currentIndex >= products.length - itemsPerPage}
-                >
-                    <FaArrowRight />
-                </button>
             </div>
         </div>
     );
+    
 };
 
 export default ProductCard;
