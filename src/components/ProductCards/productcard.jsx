@@ -94,10 +94,12 @@ const ProductCard = () => {
             image: "https://assets.unileversolutions.com/v1/60695390.png",
             rating: 3,
         },
+        
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
+    
 
     // Update items per page based on screen width
     useEffect(() => {
@@ -105,7 +107,7 @@ const ProductCard = () => {
             const width = window.innerWidth;
             if (width < 640) {
                 setItemsPerPage(1); // For mobile, show 2 items
-            } else if (width < 1024) {
+            } else if (width < 520) {
                 setItemsPerPage(3); // For tablets, show 3 items
             } else {
                 setItemsPerPage(5); // For desktops, show 5 items
@@ -131,7 +133,7 @@ const ProductCard = () => {
     };
 
     return (
-        <div className="w-full px-5 mt-6 overflow-hidden">
+        <div className="w-full px-5 mt-4 overflow-hidden">
               <h2 className="text-4xl font-bold mb-1 text-center "
                     style={{
                         fontFamily: "'Garamond', serif",
@@ -143,7 +145,7 @@ const ProductCard = () => {
                 >
                     BEST PRICE OFFER
                 </h2>
-            <p className="text-gray-700 text-center mb-8"
+            <p className="text-gray-700 text-center mb-2"
                 style={{
                     fontFamily: "'Lora', serif",
                     color: '#7F8C8D'
@@ -175,15 +177,19 @@ const ProductCard = () => {
           
     
             <div className="relative w-full">
-                <div
-                    className="flex space-x-4 transition-transform duration-300"
-                    style={{ transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }}
-                >
-                    {products.map((product) => (
-                        <div
-                            key={product.id}
-                            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 min-w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-4 flex flex-col"
-                        >
+            <div
+    className="flex gap-4 transition-transform duration-300"
+    style={{ transform: `translateX(-${currentIndex * (106 / itemsPerPage)}%)` }}
+>
+    {products.map((product) => (
+        <div
+            key={product.id}
+            className="flex-none bg-white border border-gray-200 rounded-lg shadow-lg p-4 flex flex-col"
+            style={{ 
+                width: `calc(${100 / itemsPerPage}% - ${(16 * (itemsPerPage - 1)) / itemsPerPage}px)`,
+                flex: `0 0 calc(${100 / itemsPerPage}% - ${(16 * (itemsPerPage - 1)) / itemsPerPage}px)`
+            }}
+        >
                             <div className="relative">
                                 <img
                                     src={product.image}
