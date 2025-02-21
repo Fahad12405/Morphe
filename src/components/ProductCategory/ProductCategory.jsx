@@ -4,7 +4,7 @@ import Image from 'next/image';
 const categories = [
     { name: 'Cleanser & Face Wash', img: '/category1.webp' },
     { name: 'Cream & Lotion', img: '/category2.avif' },
-    { name: 'Hair Gel & Mousse', img: '/category3.webp  ' },
+    { name: 'Hair Gel & Mousse', img: '/category3.webp' },
     { name: 'Serum & Toners', img: '/category4.webp' },
     { name: 'Body Care', img: '/category5.webp' },
     { name: 'Eye Care', img: '/category6.png' },
@@ -48,7 +48,7 @@ const ProductCategory = () => {
                                 src={category.img}
                                 alt={category.name}
                                 layout="fill"
-                                objectFit="cover"
+                                objectFit="fit"
                                 className="rounded-2xl"
                             />
                         </div>
