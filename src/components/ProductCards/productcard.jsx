@@ -94,12 +94,12 @@ const ProductCard = () => {
             image: "https://assets.unileversolutions.com/v1/60695390.png",
             rating: 3,
         },
-        
+
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
-    
+
 
     // Update items per page based on screen width
     useEffect(() => {
@@ -134,17 +134,17 @@ const ProductCard = () => {
 
     return (
         <div className="w-full px-5 mt-4 overflow-hidden">
-              <h2 className="text-4xl font-bold mb-1 text-center "
-                    style={{
-                        fontFamily: "'Garamond', serif",
-                        letterSpacing: '2px',
-                        color: '#2C3E50',
-                        textTransform: 'uppercase',
-                        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
-                    }}
-                >
-                    BEST PRICE OFFER
-                </h2>
+            <h2 className="text-4xl font-bold mb-1 text-center "
+                style={{
+                    fontFamily: "'Garamond', serif",
+                    letterSpacing: '2px',
+                    color: '#2C3E50',
+                    textTransform: 'uppercase',
+                    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
+                }}
+            >
+                BEST PRICE OFFER
+            </h2>
             <p className="text-gray-700 text-center mb-2"
                 style={{
                     fontFamily: "'Lora', serif",
@@ -154,8 +154,8 @@ const ProductCard = () => {
                 Trending Now
             </p>
             <div className="flex items-center justify-between mb-6 mr-4">
-              
-            <div className="flex space-x-2 ml-auto">
+
+                <div className="flex space-x-2 ml-auto">
                     <button
                         onClick={handlePrev}
                         className="bg-gray-800 text-white p-2 rounded-full "
@@ -163,7 +163,7 @@ const ProductCard = () => {
                     >
                         <FaArrowLeft />
                     </button>
-    
+
                     <button
                         onClick={handleNext}
                         className="bg-gray-800 text-white p-2 rounded-full"
@@ -172,24 +172,24 @@ const ProductCard = () => {
                         <FaArrowRight />
                     </button>
                 </div>
-               
+
             </div>
-          
-    
+
+
             <div className="relative w-full">
-            <div
-    className="flex gap-4 transition-transform duration-300"
-    style={{ transform: `translateX(-${currentIndex * (106 / itemsPerPage)}%)` }}
->
-    {products.map((product) => (
-        <div
-            key={product.id}
-            className="flex-none bg-white border border-gray-200 rounded-lg shadow-lg p-4 flex flex-col"
-            style={{ 
-                width: `calc(${100 / itemsPerPage}% - ${(16 * (itemsPerPage - 1)) / itemsPerPage}px)`,
-                flex: `0 0 calc(${100 / itemsPerPage}% - ${(16 * (itemsPerPage - 1)) / itemsPerPage}px)`
-            }}
-        >
+                <div
+                    className="flex gap-4 transition-transform duration-300"
+                    style={{ transform: `translateX(-${currentIndex * (106 / itemsPerPage)}%)` }}
+                >
+                    {products.map((product) => (
+                        <div
+                            key={product.id}
+                            className="flex-none bg-white border border-gray-200 rounded-lg shadow-lg p-4 flex flex-col"
+                            style={{
+                                width: `calc(${100 / itemsPerPage}% - ${(16 * (itemsPerPage - 1)) / itemsPerPage}px)`,
+                                flex: `0 0 calc(${100 / itemsPerPage}% - ${(16 * (itemsPerPage - 1)) / itemsPerPage}px)`
+                            }}
+                        >
                             <div className="relative">
                                 <img
                                     src={product.image}
@@ -222,7 +222,7 @@ const ProductCard = () => {
             </div>
         </div>
     );
-    
+
 };
 
 export default ProductCard;

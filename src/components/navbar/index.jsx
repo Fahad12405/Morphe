@@ -17,7 +17,7 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="bg-white fixed w-full z-20 top-0 border-b border-gray-200">
+    <nav className="bg-white fixed w-full z-20 top-0 border-b border-gray-200 ">
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-0">
         {/* Logo */}
         <Link href="/">
@@ -33,19 +33,19 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <ul className="hidden md:flex md:space-x-6 font-medium text-black text-sm">
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/">HOME</Link>
           </li>
           <li>
-            <Link href="/CarforSale">Cars for Sale</Link>
+            <Link href="/CarforSale">SHOP</Link>
           </li>
 
           {/* Dropdown for About */}
           <li className="relative">
             <button
               onClick={toggleDropdown}
-              className="text-black hover:bg-gray-100 rounded-lg px-3 py-0 flex items-center"
+              className="text-black hover:bg-gray-100 rounded-lg px-4 py-0 flex items-center"
             >
-              About
+              ACCESSORIES
               <svg
                 className={`ml-2 w-4 h-4 transform transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : "rotate-0"}`}
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,21 +60,21 @@ const Navbar = () => {
 
             {/* Desktop Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 bg-white rounded-lg w-48 z-10">
+              <div className="absolute left-0 mt-2  bg-white border border-gray-200 rounded-lg w-48 z-10 text-center">
                 <ul>
-                  <li><Link href="/CompanyProfile">Company Profile</Link></li>
-                  <li><Link href="/PaymentDetails">Payment Details</Link></li>
-                  <li><Link href="/PrivacyPolicy">Privacy Policy</Link></li>
-                  <li><Link href="/TermsofUse">Terms of Use</Link></li>
-                  <li><Link href="/Blogs">Blog</Link></li>
+                <li className="mb-2 mt-2"><Link href="/CompanyProfile">CLEANSER</Link></li>
+    <li className="mb-2"><Link href="/PaymentDetails">BODY CARE</Link></li>
+    <li className="mb-2"><Link href="/PrivacyPolicy">FACE MASK</Link></li>
+    <li className="mb-2"><Link href="/TermsofUse">EYE CARE</Link></li>
+    <li className="mb-2"><Link href="/Blogs">HAIR CARE</Link></li>
                 </ul>
               </div>
             )}
           </li>
 
-          <li><Link href="/contact">Contact</Link></li>
-          <li><Link href="/how-to-buy">How to Buy</Link></li>
-          <li><Link href="/why-choose-us">Why Choose Us</Link></li>
+          <li><Link href="/contact">CONTACT</Link></li>
+          <li><Link href="/how-to-buy">HOW TO ORDER </Link></li>
+          <li><Link href="/why-choose-us">SALE</Link></li>
         </ul>
 
         {/* Right Side Icons (Login, Search, Cart) */}
@@ -140,14 +140,14 @@ const Navbar = () => {
             className="absolute top-18 left-0 w-full bg-white shadow-md md:hidden z-[999999]"
           >
             <ul className="flex flex-col p-4 font-medium border border-gray-200 rounded-lg">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/CarforSale">Cars for Sale</Link></li>
-              <li className="relative">
+              <li><Link href="/">HOME</Link></li>
+              <li><Link href="/CarforSale">SHOP</Link></li>
+              <li className="relative ">
                 <button
                   onClick={toggleDropdown}
-                  className="flex py-2 px-3 text-black rounded-sm items-center"
+                  className="flex py-2 px-3 text-black  items-center"
                 >
-                  About
+                  ACCESSORIES
                   <svg
                     className={`ml-2 w-4 h-4 transform transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : "rotate-0"}`}
                     xmlns="http://www.w3.org/2000/svg"
@@ -162,20 +162,20 @@ const Navbar = () => {
 
                 {/* Mobile Dropdown Menu */}
                 {isDropdownOpen && (
-                  <div className="absolute left-0 w-full bg-white shadow-lg rounded-lg">
-                    <ul>
-                      <li><Link href="/CompanyProfile">Company Profile</Link></li>
-                      <li><Link href="/PaymentDetails">Payment Details</Link></li>
-                      <li><Link href="/PrivacyPolicy">Privacy Policy</Link></li>
-                      <li><Link href="/TermsofUse">Terms of Use</Link></li>
-                      <li><Link href="/Blogs">Blog</Link></li>
-                    </ul>
-                  </div>
+                 <div className="absolute left-0 mt-2  bg-white border border-gray-200 rounded-lg w-48 z-10 text-center">
+                <ul>
+                <li className="mb-2 mt-2"><Link href="/CompanyProfile">CLEANSER</Link></li>
+    <li className="mb-2"><Link href="/PaymentDetails">BODY CARE</Link></li>
+    <li className="mb-2"><Link href="/PrivacyPolicy">FACE MASK</Link></li>
+    <li className="mb-2"><Link href="/TermsofUse">EYE CARE</Link></li>
+    <li className="mb-2"><Link href="/Blogs">HAIR CARE</Link></li>
+                </ul>
+              </div>
                 )}
               </li>
-              <li><Link href="/contact">Contact</Link></li>
-              <li><Link href="/how-to-buy">How to Buy</Link></li>
-              <li><Link href="/why-choose-us">Why Choose Us</Link></li>
+              <li><Link href="/contact">CONTACT</Link></li>
+              <li><Link href="/how-to-buy">HOW TO ORDER</Link></li>
+              <li><Link href="/why-choose-us">SALE</Link></li>
             </ul>
           </motion.div>
         )}

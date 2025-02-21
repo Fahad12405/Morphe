@@ -14,8 +14,8 @@ const Footer = () => {
                             <FaEnvelope /> CONTACT US
                         </h3>
                         <div className="mt-2">
-                            <input type="email" placeholder="Enter your email" className="w-full p-2 text-black bg-transparent border-2 border-gray-500 rounded-md" />
-                            <textarea placeholder="Your message" className="w-full p-2 mt-2 text-black bg-transparent border-2 border-gray-500 rounded-md" rows="3"></textarea>
+                            <input type="email" placeholder="Enter your email" className="w-full p-2 text-white bg-transparent border-2 border-gray-500 rounded-md" />
+                            <textarea placeholder="Your message" className="w-full p-2 mt-2 text-white bg-transparent border-2 border-gray-500 rounded-md" rows="3"></textarea>
                             <button className="mt-2 bg-transparent text-whtie border-2 border-gray-500 px-4 py-2 rounded-md">Send</button>
 
                         </div>
