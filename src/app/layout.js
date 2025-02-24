@@ -19,15 +19,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
         cz-shortcut-listen="true"
       >
-        
-        <Navbar/>
-        <SmallNavbar/>
+
+        <Navbar />
+        <SmallNavbar />
 
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
