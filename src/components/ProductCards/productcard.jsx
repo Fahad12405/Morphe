@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaShoppingCart, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const ProductCard = () => {
@@ -99,15 +99,16 @@ const ProductCard = () => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
-
+    const startX = useRef(0); // For touch start position
+    const endX = useRef(0); // For touch end position
 
     // Update items per page based on screen width
     useEffect(() => {
         const updateItemsPerPage = () => {
             const width = window.innerWidth;
             if (width < 640) {
-                setItemsPerPage(1); // For mobile, show 2 items
-            } else if (width < 520) {
+                setItemsPerPage(1); // For mobile, show 1 item
+            } else if (width < 1024) {
                 setItemsPerPage(3); // For tablets, show 3 items
             } else {
                 setItemsPerPage(5); // For desktops, show 5 items
@@ -132,9 +133,28 @@ const ProductCard = () => {
         }
     };
 
+    // Handle swipe start
+    const handleTouchStart = (e) => {
+        startX.current = e.touches[0].clientX;
+    };
+
+    // Handle swipe end
+    const handleTouchEnd = (e) => {
+        endX.current = e.changedTouches[0].clientX;
+
+        // Swipe left to right
+        if (startX.current - endX.current > 50) {
+            handleNext();
+        }
+        // Swipe right to left
+        if (endX.current - startX.current > 50) {
+            handlePrev();
+        }
+    };
+
     return (
         <div className="w-full px-5 mt-4 overflow-hidden">
-            <h2 className="text-4xl font-bold mb-1 text-center "
+            <h2 className="text-4xl font-bold mb-1 text-center"
                 style={{
                     fontFamily: "'Garamond', serif",
                     letterSpacing: '2px',
@@ -154,7 +174,6 @@ const ProductCard = () => {
                 Trending Now
             </p>
             <div className="flex items-center justify-between mb-6 mr-4">
-
                 <div className="flex space-x-2 ml-auto">
                     <button
                         onClick={handlePrev}
@@ -172,11 +191,13 @@ const ProductCard = () => {
                         <FaArrowRight />
                     </button>
                 </div>
-
             </div>
 
-
-            <div className="relative w-full">
+            <div
+                className="relative w-full"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+            >
                 <div
                     className="flex gap-4 transition-transform duration-300"
                     style={{ transform: `translateX(-${currentIndex * (106 / itemsPerPage)}%)` }}
@@ -222,7 +243,6 @@ const ProductCard = () => {
             </div>
         </div>
     );
-
 };
 
 export default ProductCard;

@@ -16,7 +16,7 @@ const SmallNavbar = () => {
     }, []);
 
     return (
-        <div id="scrolling-container" className="w-full overflow-hidden bg-black py-1 mt-20">
+        <div id="scrolling-container" className="w-full overflow-hidden bg-black py-1 ">
             <div className="whitespace-nowrap flex text-white text-sm font-medium" 
                  style={{ animation: `scrollText ${textWidth / 20}s linear infinite` }}>
                 

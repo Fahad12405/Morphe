@@ -1,8 +1,9 @@
 "use client";
 import { useState } from 'react';
 import Image from 'next/image';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'; // Import icons
 
-const Hero = ({ images = [], height = 500, width = 1200 }) => {
+const Hero = ({ images = [], height = 500, width = 1000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -20,10 +21,7 @@ const Hero = ({ images = [], height = 500, width = 1200 }) => {
   };
 
   return (
-    <div
-      className="relative w-full"
-      style={{ height }} // Ensuring the container height is set correctly
-    >
+    <div className="relative w-full md:h-full sm:h-full h-[140px]">
       <div className="overflow-hidden h-full">
         <div
           className="flex transition-all duration-500 ease-in-out"
@@ -33,35 +31,36 @@ const Hero = ({ images = [], height = 500, width = 1200 }) => {
         >
           {images.map((image, index) => (
             <div key={index} className="w-full flex-shrink-0 relative">
-              {/* Image Container: Prevents jumping on first load */}
-              <div style={{ height: `${height}px` }} className="relative w-full">
+              {/* Image Container */}
+              <div className="relative w-full md:h-96 sm:h-full h-[140px]">
                 <Image
                   src={image.src}
                   alt={image.alt}
-                  width={width}  // Use number for width
+                  layout="responsive" // Use responsive layout
+                  width={width} // Use number for width
                   height={height} // Use number for height
-                  className="w-full h-full object-cover"
+                  className="object-cover w-full h-full "
                 />
-              </div>
-
-              {/* Dash buttons at the bottom center */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
-                <button
-                  onClick={prevSlide}
-                  className="text-6xl text-gray-200"
-                >
-                  - - {/* Left dash symbol */}
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="text-6xl text-gray-200"
-                >
-                  - - {/* Right dash symbol */}
-                </button>
               </div>
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Arrow buttons positioned at the start and end */}
+      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 flex justify-between w-full px-4">
+        <button
+          onClick={prevSlide}
+          className="text-3xl text-gray-800 rounded-full py-6"
+        >
+          <FiChevronLeft /> {/* Left arrow icon */}
+        </button>
+        <button
+          onClick={nextSlide}
+          className="text-3xl text-gray-800 rounded-full py-6"
+        >
+          <FiChevronRight /> {/* Right arrow icon */}
+        </button>
       </div>
     </div>
   );

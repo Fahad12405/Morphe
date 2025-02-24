@@ -5,12 +5,12 @@ const Page = () => {
     { src: '/banner1.jpg', alt: 'Image 1' },
     { src: '/banner2.jpg', alt: 'Image 2' },
     { src: '/banner3.jpg', alt: 'Image 3' },
-    { src: '/banner4.jpg', alt: 'Image 4' },
+    { src: '/banner7.webp', alt: 'Image 4' },
   ];
 
   return (
     <div>
-      <Hero images={images} height={500} width={1200} /> {/* Remove "px" */}
+      <Hero images={images} height={500} /> {/* Removed width prop as it's not needed */}
     </div>
   );
 };

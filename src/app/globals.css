@@ -6,3 +6,15 @@
 @tailwind utilities;
 
 
+@font-face {
+    font-family: "LuxuryFont";
+    src: url("/fonts/LuxuryFont.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Apply Globally */
+  body {
+    font-family: "LuxuryFont", serif;
+  }
+  
