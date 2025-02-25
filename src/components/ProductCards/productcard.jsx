@@ -100,7 +100,7 @@ const ProductCard = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
     const startX = useRef(0); // For touch start position
-    const endX = useRef(0); // For touch end position
+    const endX = useRef(0);
 
     // Update items per page based on screen width
     useEffect(() => {
