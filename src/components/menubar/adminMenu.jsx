@@ -1,3 +1,5 @@
+import { CloudUpload, EyeOff, LayoutDashboard } from 'lucide-react';
+
 import {
     Menubar,
     MenubarCheckboxItem,
@@ -13,18 +15,24 @@ import {
     MenubarSubTrigger,
     MenubarTrigger,
 } from "@/components/shadcn-ui/menubar"
+import Link from 'next/link';
 
 export default function AdminMenu() {
     return (
         <Menubar>
             <MenubarMenu>
-                <MenubarTrigger>File</MenubarTrigger>
+                <MenubarTrigger>
+                    <Link href={"/admin/Dashboard"} className='flex justify-between w-full items-center gap-2' >  <MenubarShortcut>  <LayoutDashboard /> </MenubarShortcut>  Dashboard</Link>
+                </MenubarTrigger>
+            </MenubarMenu>
+            <MenubarMenu>
+                <MenubarTrigger>Products</MenubarTrigger>
                 <MenubarContent>
                     <MenubarItem>
-                        New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+                        <Link href={"/admin/Dashboard/product/addProduct"} className='flex justify-between w-full' >  Add Product <MenubarShortcut>  <CloudUpload /> </MenubarShortcut> </Link>
                     </MenubarItem>
                     <MenubarItem>
-                        New Window <MenubarShortcut>⌘N</MenubarShortcut>
+                        <Link href={"/admin/Dashboard/unPublishProduct"} className='flex justify-between w-full' >  unPublish Product <MenubarShortcut>  <EyeOff /> </MenubarShortcut> </Link>
                     </MenubarItem>
                     <MenubarItem disabled>New Incognito Window</MenubarItem>
                     <MenubarSeparator />

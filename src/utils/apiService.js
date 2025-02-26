@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const ApiUrl = "https://clicknbuy.vercel.app/api" ;
+const ApiUrl = "http://localhost:5000/api";
+// const ApiUrl = "https://clicknbuy.vercel.app/api" ;
 
 const ApiService = async (method, endpoint, data = {}, token = "") => {
 
@@ -13,9 +14,7 @@ const ApiService = async (method, endpoint, data = {}, token = "") => {
             method,
             url: `${ApiUrl}/${endpoint}`,
             data,
-            headers: {
-                headers
-            },
+            headers,
         });
 
         return response.data;

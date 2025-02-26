@@ -1,10 +1,11 @@
 "use client";
+
 import { useState, useRef } from "react";
 import { ImagePlus, X } from "lucide-react";
 import TextInput from "@/components/Inputs/TextInput";
-import ButtonPrimary from "@/components/Buttons/ButtonPrimary";
+import { ButtonPrimary } from "@/components/Buttons/index";
 import CheckboxInput from "../Inputs/CheckboxInput";
-import ApiService from "@/utils/apiService";
+import { ApiService, localStorageHandler } from "@/utils/index";
 
 export default function AddProductForm() {
     const [product, setProduct] = useState({
@@ -23,10 +24,12 @@ export default function AddProductForm() {
         tags: "",
         warranty: "",
         images: [],
-        isPublished: true, // Checkbox field
+        isPublished: true,
     });
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjZWMxMTBjZmZlNWU3YjQwZTU2ZjgiLCJuYW1lIjoidG91c2VlZiIsImlhdCI6MTc0MDQzNDQ1MSwiZXhwIjoxNzQxMDM5MjUxfQ.93HM66x7K_k99l4L966CQijJhbkLl66FcV9B--y4LZM"
+    // const token = localStorageHandler.get("user")?.token;
+
+     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjZWMxMTBjZmZlNWU3YjQwZTU2ZjgiLCJuYW1lIjoidG91c2VlZiIsImlhdCI6MTc0MDQzNDQ1MSwiZXhwIjoxNzQxMDM5MjUxfQ.93HM66x7K_k99l4L966CQijJhbkLl66FcV9B--y4LZM"
 
     const fileInputRef = useRef(null);
 
@@ -38,12 +41,6 @@ export default function AddProductForm() {
             return;
         }
 
-        // console.log("Product Data:", {
-        //     ...product,
-        //     tags: product.tags.split(",").map((tag) => tag.trim()),
-        //     images: product.images.map((file) => file.name), // Only logging image names
-        // });
-
         try {
             const data = new FormData();
             for (const key in product) {
@@ -54,30 +51,26 @@ export default function AddProductForm() {
                 }
             }
 
-            console.log("Form Data:", data);
             const res = await ApiService("POST", "product/add", data, token);
 
-            console.log("Response:", res);
-
-            // Clear the form after submission
-            // setProduct({
-            //     name: "",
-            //     description: "",
-            //     category: "",
-            //     brand: "",
-            //     productPrice: "",
-            //     discountPrice: "",
-            //     sku: "",
-            //     stock: "",
-            //     unit: "pcs",
-            //     video: "",
-            //     shippingCost: "",
-            //     shippingTime: "",
-            //     tags: "",
-            //     warranty: "",
-            //     images: [],
-            //     isPublished: true,
-            // });
+            setProduct({
+                name: "",
+                description: "",
+                category: "",
+                brand: "",
+                productPrice: "",
+                discountPrice: "",
+                sku: "",
+                stock: "",
+                unit: "pcs",
+                video: "",
+                shippingCost: "",
+                shippingTime: "",
+                tags: "",
+                warranty: "",
+                images: [],
+                isPublished: true,
+            });
         } catch (error) {
             console.log(error)
         }
@@ -100,10 +93,10 @@ export default function AddProductForm() {
         { label: "Brand", name: "brand" },
         { label: "Product Price", name: "productPrice", type: "number" },
         { label: "Discount Price", name: "discountPrice", type: "number" },
-        { label: "SKU", name: "sku" },
+        // { label: "SKU", name: "sku" },
         { label: "Stock", name: "stock", type: "number" },
         { label: "Unit", name: "unit" },
-        { label: "Video", name: "video" },
+        { label: "Video (optional)", name: "video" },
         { label: "Shipping Cost", name: "shippingCost", type: "number" },
         { label: "Shipping Time", name: "shippingTime" },
         { label: "Warranty", name: "warranty" },
