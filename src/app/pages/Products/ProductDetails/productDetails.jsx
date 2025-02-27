@@ -94,7 +94,7 @@ export default function ProductDetails() {
                 <Card className="overflow-hidden">
                     <div className="grid md:grid-cols-2 gap-6 items-center ">
                         <div className="space-y-4">
-                            <AspectRatio ratio={4 / 3}> 
+                            <AspectRatio ratio={4 / 3}>
                                 <Image
                                     src={product.images?.[0].url || "/placeholder.svg"}
                                     alt={product.name}
@@ -152,7 +152,7 @@ export default function ProductDetails() {
                                         <span className="font-semibold">Stock : </span> {product.stock} {product.unit}
                                     </div>
                                     <div>
-                                        <span className="font-semibold">Shipping : </span> PKR:{product.shippingCost?.toFixed(2)}
+                                        <span className="font-semibold">Shipping : </span> PKR: {product.shippingCost?.toFixed(2)}
                                     </div>
                                     <div>
                                         <span className="font-semibold">Delivery Time : </span> {product.shippingTime}
@@ -173,6 +173,7 @@ export default function ProductDetails() {
                                     title="Update Product"
                                     icon={<CircleFadingArrowUp />}
                                     className={`w-full`}
+                                    href={`/admin/Dashboard/product/updateProduct/${product._id}`}
                                 />
                                 {/* <Button className="w-full">
                                 <CircleFadingArrowUp /> Update Product

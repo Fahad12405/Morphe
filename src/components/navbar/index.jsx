@@ -3,14 +3,17 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaRegUser   } from "react-icons/fa";
-import { IoCartOutline,IoSearchOutline  } from "react-icons/io5"; // You can use other icons if you want
+import { FaRegUser } from "react-icons/fa";
+import { IoCartOutline, IoSearchOutline } from "react-icons/io5"; // You can use other icons if you want
 import Link from "next/link";
 import Logo from "@public/Morphe-Logo.png"
+import { localStorageHandler } from "@/utils/index";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const isUserLogin = localStorageHandler.get("user");
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
   const closeDropdown = () => setIsDropdownOpen(false);
@@ -62,11 +65,11 @@ const Navbar = () => {
             {isDropdownOpen && (
               <div className="absolute left-0 mt-2  bg-white border border-gray-200 rounded-lg w-48 z-10 text-center">
                 <ul>
-                <li className="mb-2 mt-2"><Link href="/CompanyProfile">CLEANSER</Link></li>
-    <li className="mb-2"><Link href="/PaymentDetails">BODY CARE</Link></li>
-    <li className="mb-2"><Link href="/PrivacyPolicy">FACE MASK</Link></li>
-    <li className="mb-2"><Link href="/TermsofUse">EYE CARE</Link></li>
-    <li className="mb-2"><Link href="/Blogs">HAIR CARE</Link></li>
+                  <li className="mb-2 mt-2"><Link href="/CompanyProfile">CLEANSER</Link></li>
+                  <li className="mb-2"><Link href="/PaymentDetails">BODY CARE</Link></li>
+                  <li className="mb-2"><Link href="/PrivacyPolicy">FACE MASK</Link></li>
+                  <li className="mb-2"><Link href="/TermsofUse">EYE CARE</Link></li>
+                  <li className="mb-2"><Link href="/Blogs">HAIR CARE</Link></li>
                 </ul>
               </div>
             )}
@@ -79,14 +82,14 @@ const Navbar = () => {
 
         {/* Right Side Icons (Login, Search, Cart) */}
         <div className="flex items-center space-x-4">
-          <Link href="/login" className="text-black hover:text-gray-700">
-            <FaRegUser   size={24} />
+          <Link href={isUserLogin ? "/Profile" : "/Login"} className="text-black hover:text-gray-700">
+            <FaRegUser size={24} />
           </Link>
           <Link href="/search" className="text-black hover:text-gray-700">
             <IoSearchOutline size={24} />
           </Link>
           <Link href="/cart" className="text-black hover:text-gray-700">
-            <IoCartOutline  size={24} />
+            <IoCartOutline size={24} />
           </Link>
         </div>
 
@@ -162,15 +165,15 @@ const Navbar = () => {
 
                 {/* Mobile Dropdown Menu */}
                 {isDropdownOpen && (
-                 <div className="absolute left-0 mt-2  bg-white border border-gray-200 rounded-lg w-48 z-10 text-center">
-                <ul>
-                <li className="mb-2 mt-2"><Link href="/CompanyProfile">CLEANSER</Link></li>
-    <li className="mb-2"><Link href="/PaymentDetails">BODY CARE</Link></li>
-    <li className="mb-2"><Link href="/PrivacyPolicy">FACE MASK</Link></li>
-    <li className="mb-2"><Link href="/TermsofUse">EYE CARE</Link></li>
-    <li className="mb-2"><Link href="/Blogs">HAIR CARE</Link></li>
-                </ul>
-              </div>
+                  <div className="absolute left-0 mt-2  bg-white border border-gray-200 rounded-lg w-48 z-10 text-center">
+                    <ul>
+                      <li className="mb-2 mt-2"><Link href="/CompanyProfile">CLEANSER</Link></li>
+                      <li className="mb-2"><Link href="/PaymentDetails">BODY CARE</Link></li>
+                      <li className="mb-2"><Link href="/PrivacyPolicy">FACE MASK</Link></li>
+                      <li className="mb-2"><Link href="/TermsofUse">EYE CARE</Link></li>
+                      <li className="mb-2"><Link href="/Blogs">HAIR CARE</Link></li>
+                    </ul>
+                  </div>
                 )}
               </li>
               <li><Link href="/contact">CONTACT</Link></li>

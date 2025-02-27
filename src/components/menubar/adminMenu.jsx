@@ -1,4 +1,4 @@
-import { CloudUpload, EyeOff, LayoutDashboard } from 'lucide-react';
+import { CloudUpload, Eye, EyeOff, LayoutDashboard, Package, PackageOpen, Truck } from 'lucide-react';
 
 import {
     Menubar,
@@ -32,22 +32,25 @@ export default function AdminMenu() {
                         <Link href={"/admin/Dashboard/product/addProduct"} className='flex justify-between w-full' >  Add Product <MenubarShortcut>  <CloudUpload /> </MenubarShortcut> </Link>
                     </MenubarItem>
                     <MenubarItem>
-                        <Link href={"/admin/Dashboard/unPublishProduct"} className='flex justify-between w-full' >  unPublish Product <MenubarShortcut>  <EyeOff /> </MenubarShortcut> </Link>
+                        <Link href={"/admin/Dashboard/product/PublishProduct"} className='flex justify-between w-full' >  Publish Product <MenubarShortcut>  <Eye /> </MenubarShortcut> </Link>
                     </MenubarItem>
-                    <MenubarItem disabled>New Incognito Window</MenubarItem>
+                    <MenubarItem>
+                        <Link href={"/admin/Dashboard/product/unPublishProduct"} className='flex justify-between w-full' >  unPublish Product <MenubarShortcut>  <EyeOff /> </MenubarShortcut> </Link>
+                    </MenubarItem>
+                    <MenubarItem disabled> Orders <MenubarShortcut><Package /></MenubarShortcut> </MenubarItem>
                     <MenubarSeparator />
                     <MenubarSub>
-                        <MenubarSubTrigger>Share</MenubarSubTrigger>
+                        <MenubarSubTrigger>Order</MenubarSubTrigger>
                         <MenubarSubContent>
-                            <MenubarItem>Email link</MenubarItem>
-                            <MenubarItem>Messages</MenubarItem>
-                            <MenubarItem>Notes</MenubarItem>
+                            <MenubarItem>Pending <MenubarShortcut>  <Package /></MenubarShortcut> </MenubarItem>
+                            <MenubarItem>Shipped <MenubarShortcut>  <Truck /></MenubarShortcut> </MenubarItem>
+                            <MenubarItem>Delivered <MenubarShortcut>  <PackageOpen /></MenubarShortcut> </MenubarItem>
                         </MenubarSubContent>
                     </MenubarSub>
                     <MenubarSeparator />
-                    <MenubarItem>
+                    {/* <MenubarItem>
                         Print... <MenubarShortcut>⌘P</MenubarShortcut>
-                    </MenubarItem>
+                    </MenubarItem> */}
                 </MenubarContent>
             </MenubarMenu>
             <MenubarMenu>
