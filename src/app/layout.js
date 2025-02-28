@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import SmallNavbar from "@/components/SmallNav/smallNav";
 import Footer from "@/components/Footer/footer";
+import ProgressBar from "@components/Loader/ProgressBar"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,15 +20,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
         cz-shortcut-listen="true"
       >
-        
-        <Navbar/>
-        <SmallNavbar/>
+         <ProgressBar />
+        <Navbar />
+        <SmallNavbar />
 
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

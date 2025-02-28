@@ -15,21 +15,25 @@ const category = [
   '/6.jpg'
 ];
 
+export const metadata = {
+  title: 'Home',
+  description: 'This is the Home page'
+}
 
 export default function Home() {
   return (
-    <>
+    <div className="container mx-auto">
 
       <Hero />
-      <ProductCategory/>
+      <ProductCategory />
       <ProductCard />
       <Banner category={category} />
       <ProductCard />
-      <Poster backgroundImage="poster.webp"/>
+      <Poster backgroundImage="poster.webp" />
       <ProductCard />
-      <CostumerReview/>
+      <CostumerReview />
 
-    </>
+    </div>
   );
 }
 

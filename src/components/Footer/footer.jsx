@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className="bg-black text-white text-sm mt-10">
-            <div className="container mx-auto px-6 py-10">
+        <footer className="bg-black text-white text-sm mt-10 ">
+            <div className="container mx-auto px-6 py-10 !z-50">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     {/* Contact & Locations */}
                     <div>
