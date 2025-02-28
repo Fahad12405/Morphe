@@ -22,7 +22,6 @@ const Navbar = () => {
   return (
     <nav className="bg-white fixed w-full z-20 top-0 border-b border-gray-200 ">
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-0">
-        {/* Logo */}
         <Link href="/">
           <Image
             src={Logo}
@@ -33,7 +32,6 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* Desktop Navigation */}
         <ul className="hidden md:flex md:space-x-6 font-medium text-black text-sm">
           <li>
             <Link href="/">HOME</Link>
@@ -42,7 +40,6 @@ const Navbar = () => {
             <Link href="/CarforSale">SHOP</Link>
           </li>
 
-          {/* Dropdown for About */}
           <li className="relative">
             <button
               onClick={toggleDropdown}
@@ -61,7 +58,6 @@ const Navbar = () => {
               </svg>
             </button>
 
-            {/* Desktop Dropdown Menu */}
             {isDropdownOpen && (
               <div className="absolute left-0 mt-2  bg-white border border-gray-200 rounded-lg w-48 z-10 text-center">
                 <ul>
@@ -80,7 +76,7 @@ const Navbar = () => {
           <li><Link href="/why-choose-us">SALE</Link></li>
         </ul>
 
-        {/* Right Side Icons (Login, Search, Cart) */}
+      
         <div className="flex items-center space-x-4">
           <Link href={isUserLogin ? "/Profile" : "/Login"} className="text-black hover:text-gray-700">
             <FaRegUser size={24} />
@@ -93,7 +89,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Hamburger Menu Button (for mobile) */}
         <button
           type="button"
           className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -132,7 +127,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
