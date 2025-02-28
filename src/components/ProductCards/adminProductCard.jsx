@@ -40,10 +40,10 @@ export default function Product({ product }) {
                 </p>
                 <div className="flex justify-between items-center mb-4">
                     <div className="flex items-center space-x-2">
-                        <span className="text-2xl font-bold">${product.price?.toLocaleString()}</span>
+                        <span className="text-2xl font-bold">PKR: {product.price?.toLocaleString()}</span>
                         {discountPercentage > 0 && (
                             <span className="text-sm text-muted-foreground line-through">
-                                ${product.productPrice?.toLocaleString()}
+                                PKR: {product.productPrice?.toLocaleString()}
                             </span>
                         )}
                     </div>
