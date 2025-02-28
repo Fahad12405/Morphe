@@ -11,46 +11,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ApiService } from "@/utils/index";
 import { ButtonPrimaryWithIcon } from "@/components/Buttons";
 import { LoaderProgress } from "@/components/Loader/Loader";
-
-// const product = {
-//     _id: "67bedbaa5c12c2268aeb3445",
-//     name: "Dior Sauvage The Cleanser",
-//     description:
-//         "Dior Sauvage The Cleanser is een zeer effectieve cleanser voor mannen die onzuiverheden en overtollige olie op milde wijze verwijdert. Het is verrijkt met cactusextract en reinigt grondig, terwijl de mannelijke geur van Sauvage een verfrissende noot achterlaat. Ideaal voor je dagelijkse huidverzorgingsroutine voor een gerevitaliseerde en gevoede huid.",
-//     category: "face wash",
-//     brand: "Dior",
-//     price: 1910,
-//     productPrice: 1999,
-//     discountPrice: 89,
-//     stock: 100,
-//     unit: "pcs",
-//     sku: "",
-//     images: [
-//         {
-//             url: "https://res.cloudinary.com/dv3pq6g96/image/upload/v1740514521/Product%20Images/bcurlismitxcgj9tqjgs.webp",
-//             public_id: "Product Images/bcurlismitxcgj9tqjgs",
-//             _id: "67bedbaa5c12c2268aeb3446",
-//         },
-//         {
-//             url: "https://res.cloudinary.com/dv3pq6g96/image/upload/v1740514521/Product%20Images/h2whwutx6coxitcsufzj.webp",
-//             public_id: "Product Images/h2whwutx6coxitcsufzj",
-//             _id: "67bedbaa5c12c2268aeb3447",
-//         },
-//         {
-//             url: "https://res.cloudinary.com/dv3pq6g96/image/upload/v1740514521/Product%20Images/e2kebi6ibrs5qsqh1ktg.webp",
-//             public_id: "Product Images/e2kebi6ibrs5qsqh1ktg",
-//             _id: "67bedbaa5c12c2268aeb3448",
-//         },
-//         {
-//             url: "https://res.cloudinary.com/dv3pq6g96/image/upload/v1740514521/Product%20Images/xhlpxckre5k4aung8ksa.webp",
-//             public_id: "Product Images/xhlpxckre5k4aung8ksa",
-//             _id: "67bedbaa5c12c2268aeb3449",
-//         },
-//     ],
-//     shippingCost: 99,
-//     shippingTime: "1 days",
-//     warranty: "no waarenty",
-// }
+import ImageSlider from "@/components/ImageSlider";
 
 export default function ProductDetails() {
 
@@ -58,14 +19,17 @@ export default function ProductDetails() {
     const [product, setProduct] = useState({});
     const [progress, setProgress] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [selectedImage, setSelectedImage] = useState();
 
     const fetchProduct = useCallback(async () => {
         try {
             setProgress(20);
+
+            setProgress(50);
+
             const res = await ApiService("GET", `/product/get/${id}`);
 
             setProgress(80);
-            // await new Promise((resolve) => setTimeout(resolve, 500));
 
             setProduct(res.data);
             setProgress(100);
@@ -92,27 +56,26 @@ export default function ProductDetails() {
 
             {!loading &&
                 <Card className="overflow-hidden">
-                    <div className="grid md:grid-cols-2 gap-6 items-center ">
-                        <div className="space-y-4">
+                    <div className="grid md:grid-cols-2  gap-6 items-center ">
+                        <div className="space-y-4 m-2">
+                            {/* Main Image */}
                             <AspectRatio ratio={4 / 3}>
                                 <Image
-                                    src={product.images?.[0].url || "/placeholder.svg"}
+                                    src={selectedImage || product.images?.[0]?.url}
                                     alt={product.name}
                                     fill
-                                    className="rounded-md object-scale-down"
+                                    className="rounded-md object-scale-down border"
                                 />
                             </AspectRatio>
-                            <div className="grid grid-cols-4 gap-2">
-                                {product.images?.slice(1).map((image, index) => (
-                                    <AspectRatio key={image._id} ratio={1}>
-                                        <Image
-                                            src={image.url || "/placeholder.svg"}
-                                            alt={`${product.name} - Image ${index + 2}`}
-                                            fill
-                                            className="rounded-md object-cover"
-                                        />
-                                    </AspectRatio>
-                                ))}
+
+                            {/* Thumbnail Images - Modified Section */}
+                            <div>
+                                <ImageSlider
+                                    images={product.images}
+                                    setSelectedImage={setSelectedImage}
+                                    width="100%"
+                                    height="100px"
+                                />
                             </div>
                         </div>
                         <div className="py-4">

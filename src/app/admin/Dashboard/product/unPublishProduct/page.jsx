@@ -1,4 +1,4 @@
-import UnPublishProduct from '@/app/pages/Products/unPublishProduct'
+import UnPublishProduct from '@/app/pages/Products/unPublishProduct/unPublishProduct'
 import React from 'react'
 
 export const metadata = {

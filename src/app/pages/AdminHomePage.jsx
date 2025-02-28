@@ -15,7 +15,7 @@ export default function AdminHome() {
     const fetchProducts = useCallback(async () => {
         try {
             setProgress(20);
-            const res = await ApiService("GET", "/product/get");
+            const res = await ApiService("GET", "product/get");
 
             setProgress(80);
 
@@ -24,7 +24,7 @@ export default function AdminHome() {
             setProgress(100);
         } catch (error) {
             console.error("Error fetching products:", error);
-            setError(error);
+            setError(error.message);
             setProducts([]);
         } finally {
             setLoading(false);

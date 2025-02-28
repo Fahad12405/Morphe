@@ -3,7 +3,7 @@
 import ProductForm from "@/components/Forms/updateProductForm";
 import { LoaderProgress } from "@/components/Loader/Loader";
 import ProductNotFound from "@/components/NotFound/prouduct-notFound";
-import { ApiService } from "@/utils";
+import { ApiService, localStorageHandler } from "@/utils";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -16,6 +16,8 @@ export default function ProductUpdate() {
     const fetchProduct = useCallback(async () => {
         try {
             setProgress(20);
+
+            setProgress(50);
             const res = await ApiService("GET", `/product/get/${id}`);
 
             setProgress(80);
@@ -35,12 +37,11 @@ export default function ProductUpdate() {
         fetchProduct()
     }, [id]);
 
-    const memoizedProduct = useMemo(() => product, [product]);
-
 
     const updateProduct = async (data) => {
         try {
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjZWMxMTBjZmZlNWU3YjQwZTU2ZjgiLCJuYW1lIjoidG91c2VlZiIsImlhdCI6MTc0MDQzNDQ1MSwiZXhwIjoxNzQxMDM5MjUxfQ.93HM66x7K_k99l4L966CQijJhbkLl66FcV9B--y4LZM";
+            const token = localStorageHandler.get("user")?.token;
+            // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjZWMxMTBjZmZlNWU3YjQwZTU2ZjgiLCJuYW1lIjoidG91c2VlZiIsImlhdCI6MTc0MDQzNDQ1MSwiZXhwIjoxNzQxMDM5MjUxfQ.93HM66x7K_k99l4L966CQijJhbkLl66FcV9B--y4LZM";
             const res = await ApiService("patch", `/product/update/${id}`, data, token);
             if (res.status === 1) {
                 alert(res.message);

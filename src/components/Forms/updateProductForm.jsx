@@ -4,10 +4,10 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import TextInput from "@/components/Inputs/TextInput";
 import { ButtonPrimary } from "@/components/Buttons/index";
 import CheckboxInput from "@components/Inputs/CheckboxInput";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 
 export default function ProductForm({ product, onSubmit }) {
-    // Memoized version of product
+
     const initialFormData = useMemo(() => ({
         name: "",
         description: "",
@@ -20,10 +20,10 @@ export default function ProductForm({ product, onSubmit }) {
         sku: "",
         shippingCost: "",
         shippingTime: "",
-        featuredProduct: false,
-        published: false,
+        featuredProduct: product ? product.isFeatured : false,
+        published: product ? product.isPublished : false,
         tags: [],
-        ...product, 
+        ...product,
     }), [product]);
 
     const [formData, setFormData] = useState(initialFormData);
@@ -32,17 +32,28 @@ export default function ProductForm({ product, onSubmit }) {
         setFormData(initialFormData);
     }, [initialFormData]);
 
-    const handleChange = (field, value) => {
-        setFormData((prev) => ({
-            ...prev,
-            [field]: value,
-        }));
+    const fieldMapping = {
+        isPublished: "published",
+        isFeatured: "featuredProduct",
     };
+
+    const handleChange = useCallback((field, value) => {
+        const mappedField = fieldMapping[field] || field;
+        setFormData((prev) => {
+            if (prev[mappedField] === value) return prev;
+            return {
+                ...prev,
+                [mappedField]: value,
+            };
+        });
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(formData);
     };
+
+
 
     return (
         <Card className="w-full max-w-4xl mx-auto">
@@ -73,8 +84,8 @@ export default function ProductForm({ product, onSubmit }) {
                         </div>
                     </div>
 
-                    <CheckboxInput label="Published" name="published" checked={formData.published} onChange={(e) => handleChange("published", e.target.checked)} />
-                    <CheckboxInput label="Featured" name="featuredProduct" checked={formData.Featured} onChange={(e) => handleChange("featuredProduct", e.target.checked)} />
+                    <CheckboxInput label="Published" name="published" checked={formData.published} onChange={(e) => handleChange("published", !formData.published)} />
+                    <CheckboxInput label="Featured" name="featuredProduct" checked={formData.featuredProduct} onChange={(e) => handleChange("featuredProduct", !formData.featuredProduct)} />
                 </CardContent>
                 <CardFooter className="flex justify-end gap-2">
                     <ButtonPrimary title="Update Product" type="submit" className="w-full" />

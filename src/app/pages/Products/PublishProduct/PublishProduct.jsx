@@ -6,8 +6,8 @@ import { LoaderProgress } from "@/components/Loader/Loader";
 import ProductNotFound from "@/components/NotFound/prouduct-notFound";
 import AxiosError from "@/components/Error/axiosError";
 
-export default function UnPublishProduct() {
-    const [products, setProducts] = useState([]);
+export default function PublishProduct() {
+    const [products, setProducts] = useState({});
     const [progress, setProgress] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,11 +15,7 @@ export default function UnPublishProduct() {
     const fetchProducts = useCallback(async () => {
         try {
             setProgress(20);
-
-            // const token = localStorageHandler.get("user")?.token;
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjZWMxMTBjZmZlNWU3YjQwZTU2ZjgiLCJuYW1lIjoidG91c2VlZiIsImlhdCI6MTc0MDQzNDQ1MSwiZXhwIjoxNzQxMDM5MjUxfQ.93HM66x7K_k99l4L966CQijJhbkLl66FcV9B--y4LZM"
-            // console.log("Token:", token);
-            const res = await ApiService("GET", "/product/get-unpublished", {}, token);
+            const res = await ApiService("GET", "/product/get-published");
 
             setProgress(80);
 
@@ -50,7 +46,7 @@ export default function UnPublishProduct() {
     return (
         <div className="min-h-screen container mx-auto">
 
-            <h2 className="text-4xl font-bold mb-4 text-center mt-12">Unpublished Products</h2>
+            <h2 className="text-4xl font-bold mb-4 text-center mt-12">Published Products</h2>
 
             {/* Loader Progress */}
             {loading && (
@@ -66,9 +62,9 @@ export default function UnPublishProduct() {
                             <Product key={product._id} product={product} />
                         ))
                     ) : (
-                        <>
+                        <div className="">
                             <ProductNotFound />
-                        </>
+                        </div>
                     )}
                 </div>
             )}

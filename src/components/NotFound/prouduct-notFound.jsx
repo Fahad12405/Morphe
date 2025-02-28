@@ -28,14 +28,14 @@ export default function ProductNotFound() {
                         We couldn't find the product you're looking for. It might have been moved or doesn't exist.
                     </p>
                 </CardContent>
-                <CardFooter className="flex justify-center">
+                {/* <CardFooter className="flex justify-center">
                     <Button asChild>
                         <Link href="/">
                             <Home className="mr-2 h-4 w-4" />
                             Go back home
                         </Link>
                     </Button>
-                </CardFooter>
+                </CardFooter> */}
             </Card>
         </div>
     )

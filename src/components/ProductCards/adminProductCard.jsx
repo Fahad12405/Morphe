@@ -12,8 +12,8 @@ export default function Product({ product }) {
     return (
         <Card className="w-full max-w-[400px] md:max-w-[450px]">
             <CardHeader>
-                <div className="relative w-full h-48 mb-4">
-                    <Image src={product.images[0].url} alt={product.name} layout="fill" objectFit="cover" className="rounded-t-lg" />
+                <div className="relative w-full h-56 mb-4">
+                    <Image src={product.images[0].url} alt={product.name} layout="fill" objectFit="cover" className="rounded-t-lg " />
                     {product.isFeatured && (
                         <Badge className="absolute top-2 left-2" variant="secondary">
                             Featured

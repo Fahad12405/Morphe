@@ -1,4 +1,4 @@
-import PublishProduct from '@/app/pages/Products/PublishProduct';
+import PublishProduct from '@/app/pages/Products/PublishProduct/PublishProduct';
 import React from 'react'
 
 export const metadata = {

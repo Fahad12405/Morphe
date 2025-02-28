@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { ImagePlus, X } from "lucide-react";
 import TextInput from "@/components/Inputs/TextInput";
 import { ButtonPrimary } from "@/components/Buttons/index";
@@ -27,9 +27,10 @@ export default function AddProductForm() {
         isPublished: true,
     });
 
-    const token = localStorageHandler.get("user")?.token;
+    const [draggedIndex, setDraggedIndex] = useState(null);
 
-    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjZWMxMTBjZmZlNWU3YjQwZTU2ZjgiLCJuYW1lIjoidG91c2VlZiIsImlhdCI6MTc0MDQzNDQ1MSwiZXhwIjoxNzQxMDM5MjUxfQ.93HM66x7K_k99l4L966CQijJhbkLl66FcV9B--y4LZM"
+
+    const token = localStorageHandler.get("user")?.token;
 
     const fileInputRef = useRef(null);
 
@@ -76,15 +77,50 @@ export default function AddProductForm() {
         }
     };
 
-    const handleFileChange = (e) => {
+    const handleFileChange = useCallback((e) => {
         const files = Array.from(e.target.files);
-        setProduct({ ...product, images: [...product.images, ...files] });
-    };
+        setProduct((prev) => ({
+            ...prev,
+            images: [...prev.images, ...files],
+        }));
+    }, []);
 
-    const removeImage = (index) => {
-        const updatedImages = product.images.filter((_, i) => i !== index);
-        setProduct({ ...product, images: updatedImages });
-    };
+    const removeImage = useCallback((index) => {
+        setProduct((prev) => ({
+            ...prev,
+            images: prev.images.filter((_, i) => i !== index),
+        }));
+    }, []);
+
+    const handleDragStart = useCallback((index) => {
+        setDraggedIndex(index);
+    }, []);
+
+    const handleDragOver = useCallback(
+        (index) => {
+            if (draggedIndex === null || draggedIndex === index) return;
+
+            setProduct((prev) => {
+                const updatedImages = [...prev.images];
+                const draggedItem = updatedImages[draggedIndex];
+
+                updatedImages.splice(draggedIndex, 1);
+                updatedImages.splice(index, 0, draggedItem);
+
+                return { ...prev, images: updatedImages };
+            });
+
+            setDraggedIndex(index);
+        },
+        [draggedIndex]
+    );
+
+    const handleDrop = useCallback(() => {
+        setDraggedIndex(null);
+    }, []);
+
+
+
 
     const inputsFields = [
         { label: "Product Name", name: "name" },
@@ -120,7 +156,6 @@ export default function AddProductForm() {
                 ))}
             </div>
 
-            {/* Image Upload Section */}
             <div className="mt-6 flex flex-col items-center">
                 {/* Hidden File Input */}
                 <input
@@ -133,7 +168,6 @@ export default function AddProductForm() {
                     onChange={handleFileChange}
                 />
 
-                {/* Custom Upload Button */}
                 <button
                     type="button"
                     onClick={() => fileInputRef.current.click()}
@@ -142,11 +176,20 @@ export default function AddProductForm() {
                     <ImagePlus className="w-5 h-5 text-blue-500" /> Upload Images
                 </button>
 
-                {/* Image Preview */}
                 {product.images.length > 0 && (
                     <div className="mt-4 flex flex-wrap gap-2">
                         {product.images.map((file, index) => (
-                            <div key={index} className="relative w-16 h-16">
+                            <div
+                                key={index}
+                                className="relative w-16 h-16 cursor-grab"
+                                draggable
+                                onDragStart={() => handleDragStart(index)}
+                                onDragOver={(e) => {
+                                    e.preventDefault();
+                                    handleDragOver(index);
+                                }}
+                                onDrop={handleDrop}
+                            >
                                 <img
                                     src={URL.createObjectURL(file)}
                                     alt="Preview"
@@ -157,7 +200,7 @@ export default function AddProductForm() {
                                     onClick={() => removeImage(index)}
                                     className="absolute top-0 right-0 bg-red-500 text-white w-4 h-4 rounded-full flex items-center justify-center text-xs"
                                 >
-                                    <X size={12} />
+                                    ✕
                                 </button>
                             </div>
                         ))}
@@ -165,7 +208,6 @@ export default function AddProductForm() {
                 )}
             </div>
 
-            {/* Separate Checkbox at the Bottom */}
             <div className="mt-4">
                 <CheckboxInput
                     label="Published"
