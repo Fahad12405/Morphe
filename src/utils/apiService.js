@@ -1,3 +1,5 @@
+"use client"
+
 import axios from "axios";
 
 const ApiUrl = "http://localhost:5000/api";

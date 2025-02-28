@@ -9,7 +9,12 @@ export default function UserProfile() {
     const router = useRouter()
 
     const handleSubmit = () => {
-        console.log("chal gya")
+        
+        if (typeof window === "undefined") {
+            console.error("Server side par localStorage access ho raha hai!");
+            return;
+        }
+
         const data = localStorageHandler.remove("user");
 
         if (!localStorageHandler.get("user")) {

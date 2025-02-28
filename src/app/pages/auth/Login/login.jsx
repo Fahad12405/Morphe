@@ -28,7 +28,6 @@ export default function LoginPage() {
 
     const router = useRouter()
 
-    // Initialize form with react-hook-form
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
