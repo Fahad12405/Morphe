@@ -1,9 +1,9 @@
-import Hero from "@/components/Hero/page";
 import ProductCard from "@/components/ProductCards/productcard";
 import ProductCategory from "@/components/ProductCategory/ProductCategory";
 import Banner from "@/components/Banner/banner";
 import Poster from "@/components/Poster/Poster";
 import CostumerReview from "@/components/CostumerReview/CostumerReview";
+import Hero2 from "@/components/Hero2/page";
 
 
 const category = [
@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div className="container mx-auto">
 
-      <Hero />
+      <Hero2/>
       <ProductCategory />
       <ProductCard />
       <Banner category={category} />

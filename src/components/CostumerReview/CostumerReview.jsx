@@ -49,7 +49,7 @@ const CostumerReview = () => {
   };
 
   return (
-    <div className="relative max-w-6xl mx-auto px-4 py-16 ">
+    <div className="relative max-w-7xl mx-auto px-2 py-16 ">
       <h2 style={{
         fontFamily: "'Garamond', serif",
         letterSpacing: '2px',

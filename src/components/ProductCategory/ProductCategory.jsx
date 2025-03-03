@@ -16,9 +16,9 @@ const categories = [
 
 const ProductCategory = () => {
     return (
-        <div className="container mx-auto p-4 mt-12">
-            <h2
-                className="text-4xl font-bold mb-1 text-center"
+<div className="container mx-auto p-4 sm:p-1  mt-[-140px]">
+<h2
+                className="text-4xl font-bold mb-1  text-center"
                 style={{
                     fontFamily: "'Garamond', serif",
                     letterSpacing: '2px',

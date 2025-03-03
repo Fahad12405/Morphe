@@ -23,9 +23,10 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
         cz-shortcut-listen="true"
       >
-         <ProgressBar />
+         {/* <ProgressBar /> */}
+         <SmallNavbar />
         <Navbar />
-        <SmallNavbar />
+       
 
         {children}
         <Footer />

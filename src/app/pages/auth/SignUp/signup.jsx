@@ -18,12 +18,16 @@ import { useRouter } from "next/navigation"
 
 // Form validation schema
 const formSchema = z.object({
+    fullname: z
+        .string()
+        .min(1, { message: "Please enter a full name" })
+        .regex(/^[a-zA-Z\s]+$/, { message: "Full name should only contain letters and spaces" }),
     email: z.string().email({ message: "Please enter a valid email address" }),
     password: z.string().min(8, { message: "Password must be at least 8 characters" }),
     rememberMe: z.boolean().default(false),
 })
 
-export default function LoginPage() {
+export default function SignUp() {
     const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
@@ -31,6 +35,7 @@ export default function LoginPage() {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
+            fullname: "",
             email: "",
             password: "",
             rememberMe: false,
@@ -56,10 +61,10 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex min-h-[80vh] bg-gray-50">
+        <div className="flex min-h-full bg-white-50">
             {/* Left side image - hidden on mobile */}
             <div className="hidden lg:flex lg:w-1/2 bg-primary/5 items-center justify-center">
-                <div className="relative w-full max-w-md h-[60vh]">
+                <div className="relative w-full max-w-md h-[70vh]">
                     <Image
                         src="/login2.jpg"
                         alt="Login illustration"
@@ -69,7 +74,7 @@ export default function LoginPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-lg"></div>
                     <div className="absolute bottom-8 left-8 right-8 text-white">
-                     
+
                     </div>
                 </div>
             </div>
@@ -78,12 +83,26 @@ export default function LoginPage() {
             <div className="w-full lg:w-1/2 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <Card className="w-full max-w-md">
                     <CardHeader className="space-y-1">
-                        <CardTitle className="text-2xl font-bold text-center">Sign in to your account</CardTitle>
-                        <CardDescription className="text-center">Enter your email and password to sign in</CardDescription>
+                        <CardTitle className="text-2xl font-bold text-center">Sign Up to your account</CardTitle>
+                        <CardDescription className="text-center">Enter your email and password to Create your account</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                                <FormField
+                                    control={form.control}
+                                    name="fullname"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Full Name</FormLabel>
+                                            <FormControl>
+                                                <TextInput placeholder="Enter your full name" {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+
                                 <FormField
                                     control={form.control}
                                     name="email"
@@ -145,13 +164,13 @@ export default function LoginPage() {
                                 </Button>
                             </form>
                         </Form>
-                       
+
                     </CardContent>
                     <CardFooter className="flex flex-col">
                         <p className="text-center text-sm text-muted-foreground">
-                            Don't have an account?{" "}
-                            <Link href="SignUp" className="font-medium text-primary hover:text-primary/90">
-                                Sign up
+                            Already  have an account?{" "}
+                            <Link href="/Login" className="font-medium text-primary hover:text-primary/90">
+                                Log in
                             </Link>
                         </p>
                     </CardFooter>
